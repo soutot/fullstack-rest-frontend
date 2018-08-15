@@ -1,15 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import OrderList from '../components/OrderList';
 import OrderDetail from '../components/OrderDetail';
+import NotFound from '../components/NotFound';
 
 const Routes = () => (
   <Router>
-    <div>
+    <Switch>
       <Route exact path='/' component={OrderList} />
       <Route path='/order-detail/:id' component={OrderDetail} />
-    </div>
+      <Route component={NotFound} />
+    </Switch>
   </Router>
 );
 
