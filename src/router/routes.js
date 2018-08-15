@@ -1,14 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import Home from '../components/Home';
+import OrderList from '../components/OrderList';
+import OrderDetail from '../components/OrderDetail';
 
-const BasicExample = () => (
+const Routes = () => (
   <Router>
     <div>
-      <Route exact path='/' component={Home} />
+      <Route exact path='/' component={OrderList} />
+      <Route path='/order-detail' component={OrderDetail} />
     </div>
   </Router>
 );
 
-export default Route;
+export default Routes;
