@@ -2,7 +2,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-// import albelliLogo from '../../images/albelli.jpeg';
 import albelliLogo from '../../images/logo-albelli.svg';
 
 const LogoContainer = styled.div``;
