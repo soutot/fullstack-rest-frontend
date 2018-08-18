@@ -137,7 +137,26 @@ const OrderDetailForm = withFormik({
   validationSchema: Yup.object().shape({
     // postcode: Yup.string().required('postcode is required'),
   }),
-  handleSubmit: (values, { setSubmitting, props, setErrors }) => {
+  handleSubmit: async (values, { setSubmitting, props, setErrors }) => {
+    const { id } = props.match.params;
+    const { name, price, postcode, number, street } = values;
+    const data = {
+      name,
+      price,
+      address: {
+        postcode,
+        number,
+        street,
+      },
+    };
+    const order = await fetch(`http://localhost:5000/orderEdit/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    });
+
     setSubmitting(false);
   },
 })(OrderDetail);
