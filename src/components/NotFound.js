@@ -6,8 +6,6 @@ import { Card, CardContent, Button } from '@material-ui/core';
 import Template from './Template';
 import ContentHeader from './ContentHeader';
 
-import { orders } from './mocked-orders';
-
 const CardsContainer = styled.section`
   display: flex;
   flex-wrap: wrap;

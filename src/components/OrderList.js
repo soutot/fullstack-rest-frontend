@@ -6,7 +6,7 @@ import { Card, CardContent, Button } from '@material-ui/core';
 import Template from './Template';
 import ContentHeader from './ContentHeader';
 
-import { orders } from './mocked-orders';
+// import { orders } from './mocked-orders';
 
 const CardsContainer = styled.section`
   display: flex;
@@ -30,20 +30,34 @@ const CardContentStyled = styled(CardContent)`
 const CardTitle = styled.h1``;
 
 class OrderList extends React.Component {
-  renderOrderCard = ({ id, customerName, price }) => {
+  state = {
+    orders: null,
+  };
+
+  componentDidMount() {
+    fetch('http://localhost:5000/orders')
+    .then(response => response.json())
+    .then(({ data }) => {
+      this.setState({ orders: data })
+    });
+  }
+
+  renderOrderCard = ({ _id, customerName, price }) => {
     {/* <Link to={'/order-detail'}>Details</Link> */}
     return (
-      <CardStyled key={id}>
+      <CardStyled key={_id}>
         <CardContentStyled>
           <CardTitle>{customerName}</CardTitle>
           <p>{price}</p>
-          <Button variant="contained" onClick={() => this.props.history.push({ pathname: `/order-detail/${id}` })}>Details</Button>
+          <Button variant="contained" onClick={() => this.props.history.push({ pathname: `/order-detail/${_id}` })}>Details</Button>
         </CardContentStyled>
       </CardStyled>
     );
   }
 
   render() {
+    const { orders } = this.state;
+
     return (
       orders && orders.length > 0 &&
         <React.Fragment>
