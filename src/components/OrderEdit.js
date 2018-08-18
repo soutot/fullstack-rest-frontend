@@ -61,6 +61,11 @@ class OrderEdit extends React.Component {
       setFieldValue('street', data.address.street);
       setFieldValue('postcode', data.address.postcode);
       this.setState({ isLoading: false })
+    })
+    .catch(error => {
+      this.setState({ isLoading: false });
+      alert('Error while trying to fetch');
+      console.error(error);
     });
 
   }

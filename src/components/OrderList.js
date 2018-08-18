@@ -31,6 +31,7 @@ const CardTitle = styled.h1``;
 
 class OrderList extends React.Component {
   state = {
+    isLoading: true,
     orders: null,
   };
 
@@ -38,7 +39,13 @@ class OrderList extends React.Component {
     fetch('http://localhost:5000/orders')
     .then(response => response.json())
     .then(({ data }) => {
-      this.setState({ orders: data })
+      this.setState({ orders: data });
+      this.setState({ isLoading: false });
+    })
+    .catch(error => {
+      this.setState({ isLoading: false });
+      alert('Error while trying to fetch');
+      console.error(error);
     });
   }
 
