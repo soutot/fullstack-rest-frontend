@@ -55,6 +55,7 @@ class OrderEdit extends React.Component {
     return fetch(`http://localhost:5000/order/${id}`)
     .then(response => response.json())
     .then(({ data }) => {
+      console.log('--------data', data);
       setFieldValue('customerName', data.customerName);
       setFieldValue('price', data.price);
       setFieldValue('number', data.address.number);
@@ -82,7 +83,7 @@ class OrderEdit extends React.Component {
                 placeholder='Name'
                 label='Name'
                 name='customerName'
-                value={values.name}
+                value={values.customerName}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 disabled

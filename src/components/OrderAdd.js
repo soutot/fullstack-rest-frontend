@@ -59,7 +59,7 @@ class OrderAdd extends React.Component {
               placeholder='Name'
               label='Name'
               name='customerName'
-              value={values.name}
+              value={values.customerName}
               onChange={handleChange}
               onBlur={handleBlur}
             />
