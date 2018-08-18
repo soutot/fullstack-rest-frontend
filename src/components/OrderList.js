@@ -62,6 +62,9 @@ class OrderList extends React.Component {
       orders && orders.length > 0 &&
         <React.Fragment>
           <ContentHeader />
+          <div>
+            <Button variant="contained" onClick={() => this.props.history.push({ pathname: `/order-add` })}>Add</Button>
+          </div>
           <CardsContainer>
             {orders.map(order => this.renderOrderCard(order))}
           </CardsContainer>

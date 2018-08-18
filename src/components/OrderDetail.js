@@ -48,7 +48,7 @@ class OrderDetail extends React.Component {
     return fetch(`http://localhost:5000/order/${id}`)
     .then(response => response.json())
     .then(({ data }) => {
-      setFieldValue('name', data.customerName);
+      setFieldValue('customerName', data.customerName);
       setFieldValue('price', data.price);
       setFieldValue('number', data.address.number);
       setFieldValue('street', data.address.street);
@@ -69,7 +69,7 @@ class OrderDetail extends React.Component {
               <TextField 
                 placeholder='Name'
                 label='Name'
-                name='name'
+                name='customerName'
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -127,7 +127,7 @@ const OrderDetailForm = withFormik({
     const { id } = props.match.params;
     
     return ({
-      name: '',
+      customerName: '',
       price: '',
       street: '',
       number: '',
@@ -139,9 +139,9 @@ const OrderDetailForm = withFormik({
   }),
   handleSubmit: async (values, { setSubmitting, props, setErrors }) => {
     const { id } = props.match.params;
-    const { name, price, postcode, number, street } = values;
+    const { customerName, price, postcode, number, street } = values;
     const data = {
-      name,
+      customerName,
       price,
       address: {
         postcode,
