@@ -36,7 +36,7 @@ const FormStyled = styled.form`
 
 const CardTitle = styled.h1``;
 
-class OrderDetail extends React.Component {
+class OrderEdit extends React.Component {
   state = {
     isLoading: true,
   };
@@ -58,7 +58,7 @@ class OrderDetail extends React.Component {
 
   }
   render() {
-    const { handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue, values, history, match } = this.props;
+    const { handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue, values } = this.props;
 
     return (
       <CardStyled>
@@ -91,7 +91,6 @@ class OrderDetail extends React.Component {
                 value={values.street}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                disabled
               />
               <TextField 
                 placeholder='Number'
@@ -100,7 +99,6 @@ class OrderDetail extends React.Component {
                 value={values.number}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                disabled
               />
               <TextField 
                 placeholder='Postcode'
@@ -109,11 +107,10 @@ class OrderDetail extends React.Component {
                 value={values.postcode}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                disabled
               />
               <div>
-                <Button variant="contained" onClick={() => history.push({ pathname: `/order-edit/${match.params.id}` })}>Edit</Button>
-                <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
+                <Button variant="contained" type="submit">Save</Button>
+                <Button variant="contained" onClick={() => this.props.history.goBack()}>Back</Button>
               </div>
             </FormStyled>
           }
@@ -123,7 +120,7 @@ class OrderDetail extends React.Component {
   }
 };
 
-const OrderDetailForm = withFormik({
+const OrderEditForm = withFormik({
   mapPropsToValues: props => {
     const { id } = props.match.params;
     
@@ -139,8 +136,27 @@ const OrderDetailForm = withFormik({
     // postcode: Yup.string().required('postcode is required'),
   }),
   handleSubmit: async (values, { setSubmitting, props, setErrors }) => {
+    const { id } = props.match.params;
+    const { customerName, price, postcode, number, street } = values;
+    const data = {
+      customerName,
+      price,
+      address: {
+        postcode,
+        number,
+        street,
+      },
+    };
+    const order = await fetch(`http://localhost:5000/orderEdit/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+    });
+
     setSubmitting(false);
   },
-})(OrderDetail);
+})(OrderEdit);
 
-export default Template(withRouter(OrderDetailForm), 'Order Detail');
+export default Template(withRouter(OrderEditForm), 'Order Edit');

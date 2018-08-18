@@ -101,8 +101,6 @@ class OrderAdd extends React.Component {
 
 const OrderAddForm = withFormik({
   mapPropsToValues: props => {
-    const { id } = props.match.params;
-    
     return ({
       customerName: '',
       price: '',
