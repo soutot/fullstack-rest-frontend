@@ -10,6 +10,9 @@ import ContentHeader from './ContentHeader';
 
 import { orders } from './mocked-orders';
 
+// const ALLOWED_CONTRIES = ['BR', 'NL'];
+const ALLOWED_CONTRIES = ['NL'];
+
 const CardsContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
@@ -43,6 +46,26 @@ const ErrorText = styled.div`
   font-weight: bold;
 `;
 
+const validatePostCode = async (postcode) => {
+  if (!postcode) return false;
+  
+  // TODO: improve security
+  const apiKey = 'AIzaSyClMz2GdFZUXCQ9w69DKShnfErno2AfwM4';
+  let country = null;
+  
+  await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=${apiKey}`)
+  .then(response => response.json())
+  .then(({ results }) => {
+    country = results[0].address_components.reduce((acc, { types, short_name }) => {
+      if (types.includes('country')) {
+        return short_name;
+      }
+    })
+  });
+  
+  return ALLOWED_CONTRIES.includes(country);
+}
+
 class OrderEdit extends React.Component {
   state = {
     isLoading: true,
@@ -55,7 +78,6 @@ class OrderEdit extends React.Component {
     return fetch(`http://localhost:5000/order/${id}`)
     .then(response => response.json())
     .then(({ data }) => {
-      console.log('--------data', data);
       setFieldValue('customerName', data.customerName);
       setFieldValue('price', data.price);
       setFieldValue('number', data.address.number);
@@ -70,6 +92,7 @@ class OrderEdit extends React.Component {
     });
 
   }
+
   render() {
     const { handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue, values, errors, touched } = this.props;
 
@@ -128,6 +151,7 @@ class OrderEdit extends React.Component {
               {errors.postcode && touched.postcode && <ErrorText>{errors.postcode}</ErrorText>}
               <div>
                 <Button variant="contained" type="submit">Save</Button>
+                <Button variant="contained" onClick={() => this.validatePostCode()}>postcode</Button>
                 <Button variant="contained" onClick={() => this.props.history.goBack()}>Back</Button>
               </div>
             </FormStyled>
@@ -159,7 +183,13 @@ const OrderEditForm = withFormik({
     .integer()
     .min(0)
     .required('Number field is required'),
-    postcode: Yup.string().required('Postcode field is required'),
+    postcode: Yup.string()
+    .required('Postcode field is required')
+    .test({
+      name: 'is-valid-country',
+      message: 'This postcode country is not allowed',
+      test: postcode => validatePostCode(postcode),
+    }),
   }),
   handleSubmit: async (values, { setSubmitting, props, setErrors }) => {
     const { id } = props.match.params;
