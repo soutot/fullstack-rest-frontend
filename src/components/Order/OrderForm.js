@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 
 import CardTitle from '../common/CardTitle';
 
+import { colors, fontSizes } from '../../theme';
+
 const ALLOWED_CONTRIES = ['BR', 'NL'];
 // const ALLOWED_CONTRIES = ['NL'];
 
@@ -20,9 +22,9 @@ const TextFieldStyled = styled(TextField)`
 `;
 
 const ErrorText = styled.div`
-  font-size: 12px;
+  font-size: ${fontSizes.small};
   margin: 5px 0 0 5px;
-  color: #ee8188;
+  color: ${colors.error};
   font-weight: bold;
 `;
 
@@ -32,8 +34,12 @@ const ButtonsWrapper = styled.div`
   justify-content: flex-end;
 `;
 
+const CancelButton = styled(Button)`
+  color: ${colors.text} !important;
+`;
+
 const ActionButton = styled(Button)`
-  color: #FF6A13 !important; 
+  color: ${colors.primary} !important;
 `;
 
 const validatePostCode = async (postcode) => {
@@ -133,7 +139,7 @@ class Order extends React.Component {
         />
         {errors.number && touched.number && <ErrorText>{errors.number}</ErrorText>}
         <ButtonsWrapper>
-          <Button onClick={() => history.goBack()}>{isView ? 'Back' : 'Cancel'}</Button>
+          <CancelButton onClick={() => history.goBack()}>{isView ? 'Back' : 'Cancel'}</CancelButton>
           {isView ?
             <ActionButton onClick={() => history.push({ pathname: `/order-edit/${match.params.id}` })}>Edit</ActionButton>
           :

@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 
 import Template from '../Template';
 import OrderForm from './OrderForm';
+import OrderIssueList from './OrderIssueList';
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
 import Loading from '../common/Loading';
@@ -16,7 +17,6 @@ class OrderDetail extends React.Component {
   state = {
     isLoading: true,
     data: {},
-    issues: [],
   };
 
   componentDidMount() {
@@ -33,18 +33,6 @@ class OrderDetail extends React.Component {
       alert('Error while trying to fetch');
       console.error(error);
     });
-
-    fetch(`http://localhost:5000/issues/${id}`)
-    .then(response => response.json())
-    .then(({ data }) => {
-      this.setState({ issues: data })
-    })
-    .catch(error => {
-      this.setState({ isLoading: false });
-      alert('Error while trying to fetch');
-      console.error(error);
-    });
-
   }
 
   render() {
@@ -64,32 +52,7 @@ class OrderDetail extends React.Component {
             }
           </CardContent>
         </Card>
-        {issues && issues.length > 0 &&
-          <Card title='Issues'>
-            <CardContent>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Order ID</TableCell>
-                    <TableCell>Issue Key</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {issues.map(({ issueKey, orderId }) => {
-                    return (
-                      <TableRow key={issueKey} hover onClick={() => window.open(`https://albelli-test-cc.atlassian.net/projects/CC/board?issue-key=${issueKey}`, '_blank')}>
-                        <TableCell component="th" scope="row">
-                          {orderId}
-                        </TableCell>
-                        <TableCell>{issueKey}</TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-          }
+        <OrderIssueList />
       </React.Fragment>
     );
   }

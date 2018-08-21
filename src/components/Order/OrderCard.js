@@ -6,6 +6,8 @@ import Card from '../common/Card';
 import CardContent from '../common/CardContent';
 import CardTitle from '../common/CardTitle';
 
+import { colors } from '../../theme';
+
 const CardContentStyled = styled(CardContent)`
   min-width: 200px;
   min-height: 200px;
@@ -13,9 +15,13 @@ const CardContentStyled = styled(CardContent)`
 `;
 
 const IconButtonStyled = styled(IconButton)`
-  background-color: transparent !important;
-  color: #EBB923 !important;
+  background-color: ${colors.none} !important;
+  color: ${colors.secondary} !important;
   border: 3px solid !important;
+`;
+
+const Text = styled.p`
+  color: ${colors.text};
 `;
 
 const OrderCard = ({ order, onClick }) => {
@@ -24,8 +30,8 @@ const OrderCard = ({ order, onClick }) => {
     <Card key={id}>
       <CardContentStyled>
         <CardTitle>{id}</CardTitle>
-        <p>{customerName}</p>
-        <p>{`Price: ${price}`}</p>
+        <Text>{customerName}</Text>
+        <Text>{`Price: ${price}`}</Text>
         <IconButtonStyled variant="fab" onClick={onClick}>
           <Icon>arrow_forward_ios</Icon>
         </IconButtonStyled>

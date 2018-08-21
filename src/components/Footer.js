@@ -3,22 +3,24 @@ import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { IconButton } from '@material-ui/core';
 
+import { colors, fontSizes } from '../theme';
+
 const FooterStyled = styled.footer`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ddd;
+  background-color: ${colors.neutral};
   padding: 0 20px;
 `;
 
 const FooterText = styled.p`
-  color: #888;
-  font-size: 14px;
+  color: ${colors.text};
+  font-size: ${fontSizes.small};
 `;
 
 const LinkStyled = styled.a`
   text-decoration: none;
-  color: #888;
+  color: ${colors.text};
 
   &:focus, &:hover, &:visited, &:link, &:active {
     text-decoration: none;

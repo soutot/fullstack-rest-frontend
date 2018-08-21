@@ -8,6 +8,8 @@ import MenuMore from './Menu/MenuMore';
 import MenuOrder from './Menu/MenuOrder';
 import MenuHelp from './Menu/MenuHelp';
 
+import { colors } from '../theme';
+
 const MenuListStyled = styled(MenuList)`
   display: flex;
   justify-content: flex-end;
@@ -20,23 +22,23 @@ const NavStyled = styled.nav`
   display: flex;
   flex: 1;
   align-items: center;
-  background-color: #FF6A13;
+  background-color: ${colors.primary};
 `;
 
 const MenuItemStyled = styled(MenuItem)`
-  border-left: 1px solid #fff !important;
+  border-left: 1px solid ${colors.white} !important;
 `;
 
 const StyledIcon = styled(Icon).attrs({
   style: {
-    color: '#fff',
+    color: colors.white,
     fontSize: '20px',
   },
 })``;
 
 const ListItemTextStyled = styled(ListItemText)`
   > span {
-    color: #fff;
+    color: ${colors.white};
   }
 `; 
 
