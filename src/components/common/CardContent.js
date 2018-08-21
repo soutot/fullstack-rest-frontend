@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { CardContent, Button } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
 
 const Wrapper = styled(CardContent)`
   display: flex;
@@ -14,7 +14,7 @@ const CardContentStyled = ({ children, ...props }) => {
     <Wrapper {...props}>
       {children}
     </Wrapper>
-  )
-}
+  );
+};
 
 export default CardContentStyled;

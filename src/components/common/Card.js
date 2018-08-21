@@ -13,15 +13,13 @@ const CardTitle = styled.h3`
   color: ${colors.title};
 `;
 
-const CardStyled = ({ children, title, ...props }) => {
-  return (
-    <React.Fragment>
-      {title && <CardTitle>{title}</CardTitle>}
-      <Wrapper {...props}>
-        {children}
-      </Wrapper>
-    </React.Fragment>
-  )
-}
+const CardStyled = ({ children, title, ...props }) => (
+  <React.Fragment>
+    {title && <CardTitle>{title}</CardTitle>}
+    <Wrapper {...props}>
+      {children}
+    </Wrapper>
+  </React.Fragment>
+);
 
 export default CardStyled;
