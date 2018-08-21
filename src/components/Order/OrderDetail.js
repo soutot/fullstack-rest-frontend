@@ -6,20 +6,16 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
 import Template from '../Template';
-import ContentHeader from '../ContentHeader';
+import OrderForm from './OrderForm';
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
-
-const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-`
-
-const CardTitle = styled.h1``;
+import Loading from '../common/Loading';
+import CardTitle from '../common/CardTitle';
 
 class OrderDetail extends React.Component {
   state = {
     isLoading: true,
+    data: {},
   };
 
   componentDidMount() {
@@ -29,12 +25,7 @@ class OrderDetail extends React.Component {
     return fetch(`http://localhost:5000/order/${id}`)
     .then(response => response.json())
     .then(({ data }) => {
-      setFieldValue('customerName', data.customerName);
-      setFieldValue('price', data.price);
-      setFieldValue('number', data.address.number);
-      setFieldValue('street', data.address.street);
-      setFieldValue('postcode', data.address.postcode);
-      this.setState({ isLoading: false })
+      this.setState({ isLoading: false, data })
     })
     .catch(error => {
       this.setState({ isLoading: false });
@@ -43,65 +34,19 @@ class OrderDetail extends React.Component {
     });
 
   }
-  render() {
-    const { handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue, values, history, match } = this.props;
 
+  render() {
     return (
       <Card>
         <CardContent>
-          {this.state.isLoading ? <span>Loading...</span>
+          {this.state.isLoading
+          ? 
+            <Loading />
           :
-            <FormStyled onSubmit={handleSubmit}>
-              <TextField 
-                placeholder='Name'
-                label='Name'
-                name='customerName'
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                disabled
-              />
-              <TextField 
-                placeholder='Price'
-                label='Price'
-                name='price'
-                value={values.price}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                disabled
-              />
-              <TextField 
-                placeholder='Street'
-                label='Street'
-                name='street'
-                value={values.street}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                disabled
-              />
-              <TextField 
-                placeholder='Number'
-                label='Number'
-                name='number'
-                value={values.number}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                disabled
-              />
-              <TextField 
-                placeholder='Postcode'
-                label='Postcode'
-                name='postcode'
-                value={values.postcode}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                disabled
-              />
-              <div>
-                <Button variant="contained" onClick={() => history.push({ pathname: `/order-edit/${match.params.id}` })}>Edit</Button>
-                <Button variant="contained" onClick={() => history.goBack()}>Back</Button>
-              </div>
-            </FormStyled>
+            <OrderForm
+              data={this.state.data}
+              isView={true}
+            />
           }
         </CardContent>
       </Card>
@@ -109,24 +54,4 @@ class OrderDetail extends React.Component {
   }
 };
 
-const OrderDetailForm = withFormik({
-  mapPropsToValues: props => {
-    const { id } = props.match.params;
-    
-    return ({
-      customerName: '',
-      price: '',
-      street: '',
-      number: '',
-      postcode: '',
-    });
-  },
-  validationSchema: Yup.object().shape({
-    // postcode: Yup.string().required('postcode is required'),
-  }),
-  handleSubmit: async (values, { setSubmitting, props, setErrors }) => {
-    setSubmitting(false);
-  },
-})(OrderDetail);
-
-export default Template(withRouter(OrderDetailForm), 'Order Detail');
+export default Template(withRouter(OrderDetail), 'Order Detail');

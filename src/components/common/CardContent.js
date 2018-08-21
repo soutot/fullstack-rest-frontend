@@ -6,12 +6,12 @@ const Wrapper = styled(CardContent)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 `;
 
-const CardContentStyled = ({ children }) => {
+const CardContentStyled = ({ children, ...props }) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       {children}
     </Wrapper>
   )

@@ -6,9 +6,9 @@ const Wrapper = styled(Card)`
   margin: 10px;
 `;
 
-const CardStyled = ({ children }) => {
+const CardStyled = ({ children, ...props }) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       {children}
     </Wrapper>
   )

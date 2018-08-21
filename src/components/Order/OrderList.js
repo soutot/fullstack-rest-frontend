@@ -4,12 +4,13 @@ import { withRouter } from "react-router-dom";
 import { Button } from '@material-ui/core';
 
 import Template from '../Template';
+import OrderCard from './OrderCard';
 import ContentHeader from '../ContentHeader';
 import CardsContainer from '../common/CardsContainer';
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
-
-const CardTitle = styled.h1``;
+import Loading from '../common/Loading';
+import CardTitle from '../common/CardTitle';
 
 class OrderList extends React.Component {
   state = {
@@ -31,33 +32,31 @@ class OrderList extends React.Component {
     });
   }
 
-  renderOrderCard = ({ _id, customerName, price }) => {
-    {/* <Link to={'/order-detail'}>Details</Link> */}
-    return (
-      <Card key={_id}>
+  renderOrders = (orders) => {
+    return orders && orders.length > 0 ?
+      <React.Fragment>
+        <ContentHeader />
+        <CardsContainer>
+          {orders.map(order => <OrderCard key={order.id} order={order} onClick={() => this.props.history.push({ pathname: `/order-detail/${order.id}` })} />)}
+        </CardsContainer>
+      </React.Fragment>
+      :
+      <CardsContainer>
         <CardContent>
-          <CardTitle>{customerName}</CardTitle>
-          <p>{price}</p>
-          <Button variant="contained" onClick={() => this.props.history.push({ pathname: `/order-detail/${_id}` })}>Details</Button>
+          There are no orders to show
         </CardContent>
-      </Card>
-    );
+      </CardsContainer>
   }
 
   render() {
     const { orders } = this.state;
 
     return (
-      orders && orders.length > 0 &&
-        <React.Fragment>
-          <ContentHeader />
-          {/* <div>
-            <Button variant="contained" onClick={() => this.props.history.push({ pathname: `/order-add` })}>Add</Button>
-          </div> */}
-          <CardsContainer>
-            {orders.map(order => this.renderOrderCard(order))}
-          </CardsContainer>
-        </React.Fragment>
+      this.state.isLoading 
+        ? 
+          <Loading />
+        :
+          this.renderOrders(orders)
     );
   }
 };

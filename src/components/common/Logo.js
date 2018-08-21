@@ -11,9 +11,9 @@ const LogoStyled = styled.img`
   height: 100px;
 `;
 
-const Logo = () => {
+const Logo = ({ ...props }) => {
   return (
-    <LogoContainer>
+    <LogoContainer {...props}>
       <LogoStyled src={albelliLogo} alt="Albelli Logo" title="Albelli Logo" />
     </LogoContainer>
   );

@@ -5,8 +5,10 @@ import { Button, TextField } from '@material-ui/core';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-// const ALLOWED_CONTRIES = ['BR', 'NL'];
-const ALLOWED_CONTRIES = ['NL'];
+import CardTitle from '../common/CardTitle';
+
+const ALLOWED_CONTRIES = ['BR', 'NL'];
+// const ALLOWED_CONTRIES = ['NL'];
 
 
 const FormStyled = styled.form`
@@ -14,13 +16,25 @@ const FormStyled = styled.form`
   flex-direction: column;
 `
 
-const CardTitle = styled.h1``;
+const TextFieldStyled = styled(TextField)`
+  margin: 10px !important;
+`;
 
 const ErrorText = styled.div`
   font-size: 12px;
   margin: 5px 0 0 5px;
   color: #ee8188;
   font-weight: bold;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+`;
+
+const ActionButton = styled(Button)`
+  color: #FF6A13 !important; 
 `;
 
 const validatePostCode = async (postcode) => {
@@ -52,61 +66,81 @@ class Order extends React.Component {
   };
 
   render() {
-    const { handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue, values, errors, touched, isEdit } = this.props;
+    const { 
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      isSubmitting,
+      setFieldValue,
+      values,
+      errors,
+      touched,
+      isEdit,
+      isView,
+      history,
+      match,
+     } = this.props;
 
     return (
       <FormStyled onSubmit={handleSubmit}>
-        <TextField 
+        <TextFieldStyled 
           placeholder='Name'
           label='Name'
           name='customerName'
           value={values.customerName}
           onChange={handleChange}
           onBlur={handleBlur}
-          disabled={isEdit}
+          disabled={isEdit || isView}
         />
         {errors.customerName && touched.customerName && <ErrorText>{errors.customerName}</ErrorText>}
-        <TextField 
+        <TextFieldStyled 
           placeholder='Price'
           label='Price'
           name='price'
           value={values.price}
           onChange={handleChange}
           onBlur={handleBlur}
-          disabled={isEdit}
+          disabled={isEdit || isView}
         />
         {errors.price && touched.price && <ErrorText>{errors.price}</ErrorText>}
-        <TextField 
+        <TextFieldStyled 
           placeholder='Postcode'
           label='Postcode'
           name='postcode'
           value={values.postcode}
           onChange={handleChange}
           onBlur={handleBlur}
+          disabled={isView}
         />
         {errors.postcode && touched.postcode && <ErrorText>{errors.postcode}</ErrorText>}
-        <TextField 
+        <TextFieldStyled 
           placeholder='Street'
           label='Street'
           name='street'
           value={values.street}
           onChange={handleChange}
           onBlur={handleBlur}
+          disabled={isView}
         />
         {errors.street && touched.street && <ErrorText>{errors.street}</ErrorText>}
-        <TextField 
+        <TextFieldStyled 
           placeholder='Number'
           label='Number'
           name='number'
           value={values.number}
           onChange={handleChange}
           onBlur={handleBlur}
+          disabled={isView}
         />
         {errors.number && touched.number && <ErrorText>{errors.number}</ErrorText>}
-        <div>
-          <Button variant="contained" type="submit">Save</Button>
-          <Button variant="contained" onClick={() => this.props.history.goBack()}>Back</Button>
-        </div>
+        <ButtonsWrapper>
+          <Button onClick={() => history.goBack()}>{isView ? 'Back' : 'Cancel'}</Button>
+          {isView ?
+            <ActionButton onClick={() => history.push({ pathname: `/order-edit/${match.params.id}` })}>Edit</ActionButton>
+          :
+            <ActionButton type="submit">Save</ActionButton>
+          }
+        </ButtonsWrapper>
       </FormStyled>
     );
   }

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import './App.css';
 import Routes from './router/routes';
-import favicon from './images/albelli.jpeg';
+import favicon from './images/albelli.png';
 
 class App extends Component {
   render() {

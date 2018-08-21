@@ -10,8 +10,7 @@ import ContentHeader from '../ContentHeader';
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
 import OrderForm from './OrderForm';
-
-const CardTitle = styled.h1``;
+import CardTitle from '../common/CardTitle';
 
 class OrderAdd extends React.Component {
   state = {

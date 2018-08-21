@@ -9,9 +9,9 @@ const Wrapper = styled.section`
   align-self: center;
 `;
 
-const CardsContainer = ({ children }) => {
+const CardsContainer = ({ children, ...props }) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       {children}
     </Wrapper>
   )

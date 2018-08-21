@@ -6,11 +6,11 @@ import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
 import Template from '../Template';
+import OrderForm from './OrderForm';
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
-import OrderForm from './OrderForm';
-
-const CardTitle = styled.h1``;
+import Loading from '../common/Loading';
+import CardTitle from '../common/CardTitle';
 
 class OrderEdit extends React.Component {
   state = {
@@ -41,7 +41,7 @@ class OrderEdit extends React.Component {
         <CardContent>
           {this.state.isLoading 
           ? 
-            <span>Loading...</span>
+            <Loading />
           :
             <OrderForm
               data={this.state.data}

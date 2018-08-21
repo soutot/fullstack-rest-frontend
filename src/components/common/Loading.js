@@ -1,6 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+import logo from '../../images/albelli.png';
+
 const LoadingContainer = styled.div`
   position: absolute;
   display: flex;
@@ -10,6 +12,8 @@ const LoadingContainer = styled.div`
   height: 100%;
   width: 100%;
   flex-direction: column;
+  top: 0;
+  left: 0;
 `;
 
 const Spinner = styled.img`
@@ -27,11 +31,10 @@ const Spinner = styled.img`
   position: absolute;
 `;
 
-const Loading = (Children, title) => {
+const Loading = ({ ...props }) => {
   return (
-    <LoadingContainer>
+    <LoadingContainer {...props}>
       <Spinner src={logo} alt="Albelli loading" title="Albelli loading" />
-      <span>Loading...</span>
     </LoadingContainer>
   );
 }

@@ -13,12 +13,6 @@ const SearchContainer = styled.article`
   justify-content: center;
 `;
 
-const ExhibitionSettings = styled.article`
-  display: flex;
-  flex: 1;
-  align-self: flex-end;
-`;
-
 class ContentHeader extends React.Component {
   state = {
     search: '',
@@ -27,7 +21,6 @@ class ContentHeader extends React.Component {
   handleChange = event => {
     this.setState({ search: event.target.value });
   };
-
 
   render() {
     return (
@@ -43,7 +36,6 @@ class ContentHeader extends React.Component {
             <Icon>search</Icon>
           </IconButton>
         </SearchContainer>
-        <ExhibitionSettings>Exhibition</ExhibitionSettings>
       </Content>
     );
   }
