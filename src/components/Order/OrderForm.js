@@ -53,11 +53,12 @@ const validatePostCode = async (postcode) => {
     if (!results || results.length === 0) {
       return;
     }
-
+    
     country = results[0].address_components.reduce((acc, { types, short_name }) => {
       if (types.includes('country')) {
         return short_name;
       }
+      return null;
     });
   });
   return ALLOWED_CONTRIES.includes(country);
@@ -74,7 +75,6 @@ class Order extends React.Component {
       handleBlur,
       handleSubmit,
       isSubmitting,
-      setFieldValue,
       values,
       errors,
       touched,
@@ -141,7 +141,12 @@ class Order extends React.Component {
           {isView ?
             <ActionButton onClick={() => history.push({ pathname: `/order-edit/${match.params.id}` })}>Edit</ActionButton>
           :
-            <ActionButton type="submit">Save</ActionButton>
+            <ActionButton
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Save
+            </ActionButton>
           }
         </ButtonsWrapper>
       </FormStyled>
@@ -152,11 +157,11 @@ class Order extends React.Component {
 const OrderForm = withFormik({
   mapPropsToValues: ({ data }) => {
     return ({
-      customerName: data && data.customerName || '',
-      price: data && data.price || '',
-      street: data && data.address.street || '',
-      number: data && data.address.number || '',
-      postcode: data && data.address.postcode || '',
+      customerName: (data && data.customerName) || '',
+      price: (data && data.price) || '',
+      street: (data && data.address.street) || '',
+      number: (data && data.address.number) || '',
+      postcode: (data && data.address.postcode) || '',
     });
   },
   validationSchema: Yup.object().shape({
