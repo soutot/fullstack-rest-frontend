@@ -20,15 +20,15 @@ class MoreMenu extends React.PureComponent {
         open={open}
         onClose={onClose}
       >
-        <MenuItem 
-          onClick={() => this.props.history.push({ pathname: '/' })}
-        >
-          List
-        </MenuItem>
         <MenuItem
           onClick={() => this.props.history.push({ pathname: '/order-add' })}
         >
           Add
+        </MenuItem>
+        <MenuItem 
+          onClick={() => this.props.history.push({ pathname: '/' })}
+        >
+          List
         </MenuItem>
       </MenuStyled>
     )

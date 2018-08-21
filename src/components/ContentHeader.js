@@ -11,6 +11,7 @@ const SearchContainer = styled.article`
   display: flex;
   flex: 1;
   justify-content: center;
+  align-items: center;
 `;
 
 class ContentHeader extends React.Component {
@@ -32,7 +33,7 @@ class ContentHeader extends React.Component {
             onChange={this.handleChange}
           />
           
-          <IconButton>
+          <IconButton onClick={() => alert('Sorry. This feature is not working')}>
             <Icon>search</Icon>
           </IconButton>
         </SearchContainer>
