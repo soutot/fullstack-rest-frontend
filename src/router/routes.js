@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import OrderList from '../components/OrderList';
-import OrderDetail from '../components/OrderDetail';
-import OrderEdit from '../components/OrderEdit';
-import OrderAdd from '../components/OrderAdd';
+import OrderList from '../components/Order/OrderList';
+import OrderDetail from '../components/Order/OrderDetail';
+import OrderEdit from '../components/Order/OrderEdit';
+import OrderAdd from '../components/Order/OrderAdd';
 import NotFound from '../components/NotFound';
 
 const Routes = () => (

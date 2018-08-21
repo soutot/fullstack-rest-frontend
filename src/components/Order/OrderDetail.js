@@ -1,33 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
-import { Card, CardContent, Button, TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-import Template from './Template';
-import ContentHeader from './ContentHeader';
-
-import { orders } from './mocked-orders';
-
-const CardsContainer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 900px;
-  align-self: center;
-`
-
-const CardStyled = styled(Card)`
-  margin: 10px;
-`;
-
-const CardContentStyled = styled(CardContent)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import Template from '../Template';
+import ContentHeader from '../ContentHeader';
+import Card from '../common/Card';
+import CardContent from '../common/CardContent';
 
 const FormStyled = styled.form`
   display: flex;
@@ -66,8 +47,8 @@ class OrderDetail extends React.Component {
     const { handleChange, handleBlur, handleSubmit, isSubmitting, setFieldValue, values, history, match } = this.props;
 
     return (
-      <CardStyled>
-        <CardContentStyled>
+      <Card>
+        <CardContent>
           {this.state.isLoading ? <span>Loading...</span>
           :
             <FormStyled onSubmit={handleSubmit}>
@@ -122,8 +103,8 @@ class OrderDetail extends React.Component {
               </div>
             </FormStyled>
           }
-        </CardContentStyled>
-      </CardStyled>
+        </CardContent>
+      </Card>
     );
   }
 };

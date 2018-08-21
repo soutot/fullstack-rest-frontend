@@ -1,31 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
-import { Card, CardContent, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
-import Template from './Template';
-import ContentHeader from './ContentHeader';
-
-// import { orders } from './mocked-orders';
-
-const CardsContainer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 900px;
-  align-self: center;
-`
-
-const CardStyled = styled(Card)`
-  margin: 10px;
-`;
-
-const CardContentStyled = styled(CardContent)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import Template from '../Template';
+import ContentHeader from '../ContentHeader';
+import CardsContainer from '../common/CardsContainer';
+import Card from '../common/Card';
+import CardContent from '../common/CardContent';
 
 const CardTitle = styled.h1``;
 
@@ -52,13 +34,13 @@ class OrderList extends React.Component {
   renderOrderCard = ({ _id, customerName, price }) => {
     {/* <Link to={'/order-detail'}>Details</Link> */}
     return (
-      <CardStyled key={_id}>
-        <CardContentStyled>
+      <Card key={_id}>
+        <CardContent>
           <CardTitle>{customerName}</CardTitle>
           <p>{price}</p>
           <Button variant="contained" onClick={() => this.props.history.push({ pathname: `/order-detail/${_id}` })}>Details</Button>
-        </CardContentStyled>
-      </CardStyled>
+        </CardContent>
+      </Card>
     );
   }
 
