@@ -6,6 +6,9 @@ import OrderForm from './OrderForm';
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
 import Loading from '../common/Loading';
+import withSnackbar from '../common/Snackbar';
+
+const fetchError = 'Error while trying to fetch';
 
 class OrderEdit extends React.Component {
   state = {
@@ -14,7 +17,7 @@ class OrderEdit extends React.Component {
   };
 
   componentDidMount() {
-    const { match } = this.props;
+    const { match, setSnackbarMessage, openSnackback } = this.props;
     const { id } = match.params;
 
     return fetch(`http://localhost:5000/order/${id}`)
@@ -24,7 +27,8 @@ class OrderEdit extends React.Component {
     })
     .catch(error => {
       this.setState({ isLoading: false });
-      alert('Error while trying to fetch');
+      setSnackbarMessage(fetchError);
+      openSnackback();
       console.error(error);
     });
 
@@ -49,4 +53,4 @@ class OrderEdit extends React.Component {
   }
 }
 
-export default Template(withRouter(OrderEdit), 'Order Edit');
+export default Template(withSnackbar(withRouter(OrderEdit), 'Order Edit'));

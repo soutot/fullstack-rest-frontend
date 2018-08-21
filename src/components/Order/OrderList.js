@@ -7,6 +7,9 @@ import ContentHeader from '../ContentHeader';
 import CardsContainer from '../common/CardsContainer';
 import CardContent from '../common/CardContent';
 import Loading from '../common/Loading';
+import withSnackbar from '../common/Snackbar';
+
+const fetchError = 'Error while trying to fetch';
 
 class OrderList extends React.Component {
   state = {
@@ -22,8 +25,11 @@ class OrderList extends React.Component {
       this.setState({ isLoading: false });
     })
     .catch(error => {
+      const { setSnackbarMessage, openSnackback } = this.props;
+
       this.setState({ isLoading: false });
-      alert('Error while trying to fetch');
+      setSnackbarMessage(fetchError);
+      openSnackback();
       console.error(error);
     });
   }
@@ -59,4 +65,4 @@ class OrderList extends React.Component {
   }
 }
 
-export default Template(withRouter(OrderList), 'Order List');
+export default Template(withSnackbar(withRouter(OrderList), 'Order List'));

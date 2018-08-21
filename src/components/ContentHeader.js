@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Icon, TextField, IconButton } from '@material-ui/core';
+import withSnackbar from './common/Snackbar';
 
 const Content = styled.main`
   display: flex;
@@ -19,11 +20,13 @@ class ContentHeader extends React.Component {
     search: '',
   };
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ search: event.target.value });
   }
 
   render() {
+    const { setSnackbarMessage, openSnackback } = this.props;
+    
     return (
       <Content>
         <SearchContainer>
@@ -33,7 +36,10 @@ class ContentHeader extends React.Component {
             onChange={this.handleChange}
           />
           
-          <IconButton onClick={() => alert('Sorry. This feature is not working')}>
+          <IconButton onClick={() => {
+             setSnackbarMessage('Sorry. This feature is not available');
+             openSnackback();
+          }}>
             <Icon>search</Icon>
           </IconButton>
         </SearchContainer>
@@ -42,4 +48,4 @@ class ContentHeader extends React.Component {
   }
 }
 
-export default ContentHeader;
+export default withSnackbar(ContentHeader);

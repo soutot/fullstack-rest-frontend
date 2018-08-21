@@ -4,7 +4,9 @@ import { withRouter } from "react-router-dom";
 import { Button, TextField } from '@material-ui/core';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
+import idx from 'idx';
 
+import withSnackbar from '../common/Snackbar';
 import { colors, fontSizes } from '../../theme';
 
 const ALLOWED_CONTRIES = ['BR', 'NL'];
@@ -157,11 +159,11 @@ class Order extends React.Component {
 const OrderForm = withFormik({
   mapPropsToValues: ({ data }) => {
     return ({
-      customerName: (data && data.customerName) || '',
-      price: (data && data.price) || '',
-      street: (data && data.address.street) || '',
-      number: (data && data.address.number) || '',
-      postcode: (data && data.address.postcode) || '',
+      customerName: idx(data, _ => _.customerName) || '',
+      price: idx(data, _ => _.price) || '',
+      street: idx(data, _ => _.address.street) || '',
+      number: idx(data, _ => _.address.number) || '',
+      postcode: idx(data, _ => _.address.postcode) || '',
     });
   },
   validationSchema: Yup.object().shape({
@@ -183,6 +185,7 @@ const OrderForm = withFormik({
   }),
   handleSubmit: async (values, { setSubmitting, props }) => {
     const { id } = props.match.params;
+    const { setSnackbarMessage, openSnackback } = props;
     const { customerName, price, postcode, number, street } = values;
     const data = {
       customerName,
@@ -206,7 +209,10 @@ const OrderForm = withFormik({
     });
 
     setSubmitting(false);
+    const successMessage = props.isEdit ? 'The order has been edited!' : 'The order has been saved!';
+    setSnackbarMessage(successMessage);
+    openSnackback();
   },
 })(Order);
 
-export default withRouter(OrderForm);
+export default withSnackbar(withRouter(OrderForm));

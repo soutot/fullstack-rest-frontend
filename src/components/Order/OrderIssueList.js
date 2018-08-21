@@ -6,8 +6,11 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
 import Loading from '../common/Loading';
+import withSnackbar from '../common/Snackbar';
 
 import { colors } from '../../theme';
+
+const fetchError = 'Error while trying to fetch';
 
 const Text = styled.span`
   color: ${colors.text};
@@ -20,7 +23,7 @@ class OrderIssueList extends React.Component {
   };
 
   componentDidMount() {
-    const { match } = this.props;
+    const { match, setSnackbarMessage, openSnackback } = this.props;
     const { id } = match.params;
 
     fetch(`http://localhost:5000/issues/${id}`)
@@ -30,7 +33,8 @@ class OrderIssueList extends React.Component {
     })
     .catch(error => {
       this.setState({ isLoading: false });
-      alert('Error while trying to fetch');
+      setSnackbarMessage(fetchError);
+      openSnackback();
       console.error(error);
     });
 
@@ -80,4 +84,4 @@ class OrderIssueList extends React.Component {
   }
 }
 
-export default withRouter(OrderIssueList);
+export default withSnackbar(withRouter(OrderIssueList));

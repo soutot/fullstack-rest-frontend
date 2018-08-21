@@ -32,7 +32,7 @@ const Template = (Children, title) => {
           <Menu />
           <Header />
           <Content>
-            {Children ? <Children /> : 'No content to show'}
+            {Children ? <Children {...this.props} /> : 'No content to show'}
           </Content>
           <Footer />
         </Wrapper>
