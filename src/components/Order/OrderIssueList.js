@@ -1,16 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
-import { Button, TextField, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
-import { withFormik } from 'formik';
-import * as Yup from 'yup';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
-import Template from '../Template';
-import OrderForm from './OrderForm';
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
 import Loading from '../common/Loading';
-import CardTitle from '../common/CardTitle';
 
 import { colors } from '../../theme';
 
@@ -25,7 +20,7 @@ class OrderIssueList extends React.Component {
   };
 
   componentDidMount() {
-    const { setFieldValue, match } = this.props;
+    const { match } = this.props;
     const { id } = match.params;
 
     fetch(`http://localhost:5000/issues/${id}`)
@@ -41,7 +36,7 @@ class OrderIssueList extends React.Component {
 
   }
 
-  renderIssueList = (issues) => {
+  renderIssueList(issues) {
     return (
       issues && issues.length > 0 &&
       <Card title='Issues'>
@@ -70,7 +65,7 @@ class OrderIssueList extends React.Component {
           </Table>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   render() {
@@ -83,6 +78,6 @@ class OrderIssueList extends React.Component {
         this.renderIssueList(issues)
     );
   }
-};
+}
 
 export default withRouter(OrderIssueList);

@@ -12,7 +12,7 @@ const CardTitle = ({ children, ...props }) => {
     <Wrapper {...props}>
       {children}
     </Wrapper>
-  )
-}
+  );
+};
 
 export default CardTitle;

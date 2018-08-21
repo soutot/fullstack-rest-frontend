@@ -1,16 +1,12 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
-import { Button } from '@material-ui/core';
 
 import Template from '../Template';
 import OrderCard from './OrderCard';
 import ContentHeader from '../ContentHeader';
 import CardsContainer from '../common/CardsContainer';
-import Card from '../common/Card';
 import CardContent from '../common/CardContent';
 import Loading from '../common/Loading';
-import CardTitle from '../common/CardTitle';
 
 class OrderList extends React.Component {
   state = {
@@ -32,12 +28,14 @@ class OrderList extends React.Component {
     });
   }
 
-  renderOrders = (orders) => {
+  renderOrders(orders) {
+    const { history } = this.props;
+
     return orders && orders.length > 0 ?
       <React.Fragment>
         <ContentHeader />
         <CardsContainer>
-          {orders.map(order => <OrderCard key={order.id} order={order} onClick={() => this.props.history.push({ pathname: `/order-detail/${order.id}` })} />)}
+          {orders.map(order => <OrderCard key={order.id} order={order} onClick={() => history.push({ pathname: `/order-detail/${order.id}` })} />)}
         </CardsContainer>
       </React.Fragment>
       :
@@ -45,7 +43,7 @@ class OrderList extends React.Component {
         <CardContent>
           There are no orders to show
         </CardContent>
-      </CardsContainer>
+      </CardsContainer>;
   }
 
   render() {
@@ -59,6 +57,6 @@ class OrderList extends React.Component {
           this.renderOrders(orders)
     );
   }
-};
+}
 
 export default Template(withRouter(OrderList), 'Order List');

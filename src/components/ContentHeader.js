@@ -19,9 +19,9 @@ class ContentHeader extends React.Component {
     search: '',
   };
 
-  handleChange = event => {
+  handleChange(event) {
     this.setState({ search: event.target.value });
-  };
+  }
 
   render() {
     return (
@@ -40,6 +40,6 @@ class ContentHeader extends React.Component {
       </Content>
     );
   }
-};
+}
 
 export default ContentHeader;

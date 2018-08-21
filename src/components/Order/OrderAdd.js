@@ -1,18 +1,16 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
-import { Button, TextField } from '@material-ui/core';
-import { withFormik } from 'formik';
-import * as Yup from 'yup';
 
 import Template from '../Template';
-import ContentHeader from '../ContentHeader';
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
 import OrderForm from './OrderForm';
-import CardTitle from '../common/CardTitle';
 
-class OrderAdd extends React.Component {
+const State = {
+  isLoading: Boolean,
+};
+
+class OrderAdd extends React.Component<State> {
   state = {
     isLoading: true,
   };
@@ -26,6 +24,6 @@ class OrderAdd extends React.Component {
       </Card>
     );
   }
-};
+}
 
 export default Template(withRouter(OrderAdd), 'Order Add');

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Button, Icon, IconButton } from '@material-ui/core';
+import { Icon, IconButton } from '@material-ui/core';
 
 import Card from '../common/Card';
 import CardContent from '../common/CardContent';
@@ -24,7 +24,7 @@ const Text = styled.p`
   color: ${colors.text};
 `;
 
-const OrderCard = ({ order, onClick }) => {
+const OrderCard = ({ order, onClick }: Object) => {
   const { id, customerName, price } = order;
   return (
     <Card key={id}>
@@ -38,6 +38,6 @@ const OrderCard = ({ order, onClick }) => {
       </CardContentStyled>
     </Card>
   );
-}
+};
 
 export default OrderCard;

@@ -31,11 +31,11 @@ const Social = styled.div`
   display: flex;
 `;
 
-const Footer = (Children, title) => {
+const Footer = () => {
   return (
     <React.Fragment>
       <Helmet>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css' integrity='sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ' crossorigin='anonymous' />
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css' integrity='sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ' crossOrigin='anonymous' />
       </Helmet>
       <FooterStyled>
         <FooterText>albelli © 2018</FooterText>
@@ -43,18 +43,18 @@ const Footer = (Children, title) => {
         <Social>
           <IconButton>
             <LinkStyled target='_blank' href='https://github.com/soutot'>
-              <i class="fab fa-github" />
+              <i className='fab fa-github' />
             </LinkStyled>
           </IconButton>
           <IconButton>
             <LinkStyled target='_blank' href='https://www.linkedin.com/in/tiago-souto/'>
-            <i class="fab fa-linkedin" />
+            <i className='fab fa-linkedin' />
             </LinkStyled>
           </IconButton>
         </Social>
       </FooterStyled>
     </React.Fragment>
   );
-}
+};
 
 export default Footer;

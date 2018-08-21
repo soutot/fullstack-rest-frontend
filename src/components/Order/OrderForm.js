@@ -5,8 +5,6 @@ import { Button, TextField } from '@material-ui/core';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
-import CardTitle from '../common/CardTitle';
-
 import { colors, fontSizes } from '../../theme';
 
 const ALLOWED_CONTRIES = ['BR', 'NL'];
@@ -15,7 +13,7 @@ const ALLOWED_CONTRIES = ['BR', 'NL'];
 const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
-`
+`;
 
 const TextFieldStyled = styled(TextField)`
   margin: 10px !important;
@@ -60,10 +58,10 @@ const validatePostCode = async (postcode) => {
       if (types.includes('country')) {
         return short_name;
       }
-    })
+    });
   });
   return ALLOWED_CONTRIES.includes(country);
-}
+};
 
 class Order extends React.Component {
   state = {
@@ -149,7 +147,7 @@ class Order extends React.Component {
       </FormStyled>
     );
   }
-};
+}
 
 const OrderForm = withFormik({
   mapPropsToValues: ({ data }) => {
@@ -178,7 +176,7 @@ const OrderForm = withFormik({
       test: postcode => validatePostCode(postcode),
     }),
   }),
-  handleSubmit: async (values, { setSubmitting, props, setErrors }) => {
+  handleSubmit: async (values, { setSubmitting, props }) => {
     const { id } = props.match.params;
     const { customerName, price, postcode, number, street } = values;
     const data = {
@@ -194,7 +192,7 @@ const OrderForm = withFormik({
     const method = props.isEdit ? 'PUT' : 'POST';
     const url = props.isEdit ? `http://localhost:5000/orderEdit/${id}` : 'http://localhost:5000/orderAdd';
     
-    const order = await fetch(url, {
+    await fetch(url, {
       method,
       body: JSON.stringify(data),
       headers: new Headers({

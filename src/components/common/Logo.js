@@ -17,6 +17,6 @@ const Logo = ({ ...props }) => {
       <LogoStyled src={albelliLogo} alt="Albelli Logo" title="Albelli Logo" />
     </LogoContainer>
   );
-}
+};
 
 export default Logo;

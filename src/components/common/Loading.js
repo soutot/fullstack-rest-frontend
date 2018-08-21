@@ -37,6 +37,6 @@ const Loading = ({ ...props }) => {
       <Spinner src={logo} alt="Albelli loading" title="Albelli loading" />
     </LoadingContainer>
   );
-}
+};
 
 export default Loading;

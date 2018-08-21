@@ -14,7 +14,7 @@ const CardsContainer = ({ children, ...props }) => {
     <Wrapper {...props}>
       {children}
     </Wrapper>
-  )
-}
+  );
+};
 
 export default CardsContainer;

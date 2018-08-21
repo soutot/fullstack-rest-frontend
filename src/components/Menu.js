@@ -1,9 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Link, withRouter } from "react-router-dom";
-import { Menu, MenuItem, MenuList, ListItemIcon, ListItemText, Icon, Button } from '@material-ui/core';
+import { withRouter } from "react-router-dom";
+import { MenuItem, MenuList, ListItemIcon, ListItemText, Icon } from '@material-ui/core';
 
-import Logo from './common/Logo';
 import MenuMore from './Menu/MenuMore';
 import MenuOrder from './Menu/MenuOrder';
 import MenuHelp from './Menu/MenuHelp';
@@ -50,14 +49,14 @@ class MenuComponent extends React.Component {
     anchor: null,
   };
 
-  handleClose = () => {
+  handleClose() {
     this.setState({
       isOrderMenuOpen: false,
       isHelpMenuOpen: false,
       isMoreMenuOpen: false,
       anchor: null,
     });
-  };
+  }
 
   render() {
     return (

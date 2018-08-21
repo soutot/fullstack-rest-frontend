@@ -11,14 +11,10 @@ const HeaderStyled = styled.header`
   align-items: center;
 `;
 
-const LogoContainer = styled.div`
-  margin: 15px;
-`;
-
 const PageTitleContainer = styled.div`
 `;
 
-const Header = (Children, title) => {
+const Header = () => {
   return (
     <HeaderStyled>
       <Link to={'/'}>
@@ -27,6 +23,6 @@ const Header = (Children, title) => {
       <PageTitleContainer>Welcome to Albelli</PageTitleContainer>
     </HeaderStyled>
   );
-}
+};
 
 export default Header;

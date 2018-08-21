@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Card } from '@material-ui/core';
 import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
-import { Menu, MenuItem, Icon } from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
 
 const MenuStyled = styled(Menu)`
   > div:last-child {
@@ -11,7 +10,13 @@ const MenuStyled = styled(Menu)`
   }
 `;
 
-class MoreMenu extends React.PureComponent {
+const Props = {
+  open: Boolean,
+  onClose: () => {},
+  anchorEl: React.Node,
+};
+
+class MoreMenu extends React.PureComponent<Props> {
   render() {
     const { anchorEl, open, onClose } = this.props;
     return (
@@ -31,7 +36,7 @@ class MoreMenu extends React.PureComponent {
           Soutot
         </MenuItem>
       </MenuStyled>
-    )
+    );
   }
 }
 
