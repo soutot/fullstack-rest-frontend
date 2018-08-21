@@ -6,11 +6,18 @@ const Wrapper = styled(Card)`
   margin: 10px;
 `;
 
-const CardStyled = ({ children, ...props }) => {
+const CardTitle = styled.h3`
+  margin: 10px;
+`;
+
+const CardStyled = ({ children, title, ...props }) => {
   return (
-    <Wrapper {...props}>
-      {children}
-    </Wrapper>
+    <React.Fragment>
+      {title && <CardTitle>{title}</CardTitle>}
+      <Wrapper {...props}>
+        {children}
+      </Wrapper>
+    </React.Fragment>
   )
 }
 

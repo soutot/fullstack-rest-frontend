@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -16,13 +16,14 @@ class OrderDetail extends React.Component {
   state = {
     isLoading: true,
     data: {},
+    issues: [],
   };
 
   componentDidMount() {
     const { setFieldValue, match } = this.props;
     const { id } = match.params;
 
-    return fetch(`http://localhost:5000/order/${id}`)
+    fetch(`http://localhost:5000/order/${id}`)
     .then(response => response.json())
     .then(({ data }) => {
       this.setState({ isLoading: false, data })
@@ -33,23 +34,63 @@ class OrderDetail extends React.Component {
       console.error(error);
     });
 
+    fetch(`http://localhost:5000/issues/${id}`)
+    .then(response => response.json())
+    .then(({ data }) => {
+      this.setState({ issues: data })
+    })
+    .catch(error => {
+      this.setState({ isLoading: false });
+      alert('Error while trying to fetch');
+      console.error(error);
+    });
+
   }
 
   render() {
+    const { isLoading, data, issues } = this.state;
     return (
-      <Card>
-        <CardContent>
-          {this.state.isLoading
-          ? 
-            <Loading />
-          :
-            <OrderForm
-              data={this.state.data}
-              isView={true}
-            />
+      <React.Fragment>
+        <Card title='Detail'>
+          <CardContent>
+            {isLoading
+            ? 
+              <Loading />
+            :
+              <OrderForm
+                data={data}
+                isView={true}
+              />
+            }
+          </CardContent>
+        </Card>
+        {issues && issues.length > 0 &&
+          <Card title='Issues'>
+            <CardContent>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Order ID</TableCell>
+                    <TableCell>Issue Key</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {issues.map(({ issueKey, orderId }) => {
+                    return (
+                      <TableRow key={issueKey} hover onClick={() => window.open(`https://albelli-test-cc.atlassian.net/projects/CC/board?issue-key=${issueKey}`, '_blank')}>
+                        <TableCell component="th" scope="row">
+                          {orderId}
+                        </TableCell>
+                        <TableCell>{issueKey}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
           }
-        </CardContent>
-      </Card>
+      </React.Fragment>
     );
   }
 };

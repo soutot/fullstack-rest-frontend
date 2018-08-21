@@ -21,7 +21,7 @@ const LinkStyled = styled.a`
   color: #888;
 
   &:focus, &:hover, &:visited, &:link, &:active {
-      text-decoration: none;
+    text-decoration: none;
   }
 `;
 
