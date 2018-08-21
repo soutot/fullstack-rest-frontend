@@ -49,7 +49,7 @@ class MenuComponent extends React.Component {
     anchor: null,
   };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({
       isOrderMenuOpen: false,
       isHelpMenuOpen: false,

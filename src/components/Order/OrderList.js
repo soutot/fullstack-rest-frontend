@@ -34,7 +34,7 @@ class OrderList extends React.Component {
     });
   }
 
-  renderOrders(orders) {
+  renderOrders = (orders) => {
     const { history } = this.props;
 
     return orders && orders.length > 0 ?

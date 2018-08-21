@@ -19,7 +19,7 @@ const Template = (Children, title) => {
       search: '',
     };
   
-    handleChange(event) {
+    handleChange = (event) => {
       this.setState({ search: event.target.value });
     }
   
