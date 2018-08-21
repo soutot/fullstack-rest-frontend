@@ -10,7 +10,6 @@ import CardTitle from '../common/CardTitle';
 const ALLOWED_CONTRIES = ['BR', 'NL'];
 // const ALLOWED_CONTRIES = ['NL'];
 
-
 const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
