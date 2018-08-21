@@ -5,6 +5,7 @@ const FooterStyled = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #ddd;
 `;
 
 const Footer = (Children, title) => {

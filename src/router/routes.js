@@ -14,6 +14,8 @@ const Routes = () => (
       <Route path='/order-detail/:id' component={OrderDetail} />
       <Route path='/order-edit/:id' component={OrderEdit} />
       <Route path='/order-add' component={OrderAdd} />
+      <Route path='/soutot' component={() => window.location.href = 'http://github.com/soutot'}/>
+
       <Route component={NotFound} />
     </Switch>
   </Router>
