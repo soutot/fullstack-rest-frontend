@@ -46,7 +46,8 @@ const validatePostCode = async (postcode) => {
   if (!postcode) return false;
 
   // TODO: improve security
-  const apiKey = 'AIzaSyC4WPicQ3D2MUeaM939o8RHdBeEML4R8cA';
+  const apiKey = 'AIzaSyClMz2GdFZUXCQ9w69DKShnfErno2AfwM4';
+  // const apiKey = 'AIzaSyC4WPicQ3D2MUeaM939o8RHdBeEML4R8cA';
   let country = null;
   
   await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=${apiKey}`)

@@ -57,4 +57,4 @@ class OrderDetail extends React.Component {
   }
 }
 
-export default Template(withSnackbar(withRouter(OrderDetail), 'Order Detail'));
+export default Template(withSnackbar(withRouter(OrderDetail)), 'Order Detail');

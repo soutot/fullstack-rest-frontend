@@ -65,4 +65,4 @@ class OrderList extends React.Component {
   }
 }
 
-export default Template(withSnackbar(withRouter(OrderList), 'Order List'));
+export default Template(withSnackbar(withRouter(OrderList)), 'Order List');

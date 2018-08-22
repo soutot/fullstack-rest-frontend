@@ -53,4 +53,4 @@ class OrderEdit extends React.Component {
   }
 }
 
-export default Template(withSnackbar(withRouter(OrderEdit), 'Order Edit'));
+export default Template(withSnackbar(withRouter(OrderEdit)), 'Order Edit');
