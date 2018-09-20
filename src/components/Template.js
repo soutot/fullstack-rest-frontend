@@ -27,7 +27,7 @@ const Template = (Children, title) => {
       return (
         <Wrapper>
           <Helmet>
-            <title>{`Albelli ${title ? `| ${title}` : ''}`}</title>
+            <title>{`Fullstack ${title ? `| ${title}` : ''}`}</title>
           </Helmet>
           <Menu />
           <Header />

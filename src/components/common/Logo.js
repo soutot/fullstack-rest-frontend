@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import albelliLogo from '../../images/logo-albelli.svg';
+import reactLogo from '../../images/logo-react.svg';
 
 const LogoContainer = styled.div``;
 
@@ -14,7 +14,7 @@ const LogoStyled = styled.img`
 const Logo = ({ ...props }) => {
   return (
     <LogoContainer {...props}>
-      <LogoStyled src={albelliLogo} alt="Albelli Logo" title="Albelli Logo" />
+      <LogoStyled src={reactLogo} alt="React Logo" title="React Logo" />
     </LogoContainer>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import logo from '../../images/albelli.png';
+import logo from '../../images/react.png';
 
 const LoadingContainer = styled.div`
   position: absolute;
@@ -34,7 +34,7 @@ const Spinner = styled.img`
 const Loading = ({ ...props }) => {
   return (
     <LoadingContainer {...props}>
-      <Spinner src={logo} alt="Albelli loading" title="Albelli loading" />
+      <Spinner src={logo} alt="Fullstack loading" title="Fullstack loading" />
     </LoadingContainer>
   );
 };

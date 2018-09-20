@@ -20,7 +20,7 @@ const Header = () => {
       <Link to={'/'}>
         <Logo />
       </Link>
-      <PageTitleContainer>Welcome to Albelli</PageTitleContainer>
+      <PageTitleContainer>Welcome to Fullstack</PageTitleContainer>
     </HeaderStyled>
   );
 };

@@ -55,7 +55,7 @@ class OrderIssueList extends React.Component {
             <TableBody>
               {issues.map(({ issueKey, orderId }) => {
                 return (
-                  <TableRow key={issueKey} hover onClick={() => window.open(`https://albelli-test-cc.atlassian.net/projects/CC/board?issue-key=${issueKey}`, '_blank')}>
+                  <TableRow key={issueKey} hover onClick={() => window.open(`https://google.com`, '_blank')}>
                     <TableCell component="th" scope="row">
                       <Text>{orderId}</Text>
                     </TableCell>

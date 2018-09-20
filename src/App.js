@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import './App.css';
 import Routes from './router/routes';
-import favicon from './images/albelli.png';
+import favicon from './images/react.png';
 
 class App extends Component {
   render() {
@@ -11,9 +11,9 @@ class App extends Component {
       <React.Fragment>
         <Helmet>
           <meta charSet='utf-8' />
-          <title>Albelli</title>
+          <title>Fullstack</title>
           <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet' />
-          <meta name='description' content='albelli orders' />
+          <meta name='description' content='fullstack orders' />
           <link rel='icon' type='image/png' href={favicon} sizes='16x16' />
         </Helmet>
         <Routes />
